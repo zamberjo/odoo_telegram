@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_users_form_simple_modif_inherited_telegram" model="ir.ui.view">
+            <field name="name">view_users_form_simple_modif_inherited_telegram</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="email" position="before">
+                        <field name="notify_telegram"/>
+                        <field name="telegram_id"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>

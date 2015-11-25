@@ -51,7 +51,7 @@ class MailNotification(models.Model):
         message = self.env['mail.message'].browse(message_id)
         if message.subject or message.body:
             message_text = "\n".join([
-                "El usuario %s te ha enviado el siguiente mensaje:" % (self.env['res.users'].browse(self.env.uid).partner_id.name),
+                "El usuario %s te ha enviado el siguiente mensaje:" % (message.author_id.name),
                 message.subject or '',
                 message.body or ''
             ])

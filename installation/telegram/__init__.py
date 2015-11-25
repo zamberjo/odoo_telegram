@@ -17,11 +17,11 @@ BOT = None
 start_bak = ThreadedServer.start
 
 def telegram_thread(bot, telegram_none_stop, telegram_interval, telegram_block):
-    _logger.info('ThreadedServer:: telegram-bot polling...')
-    _logger.info('ThreadedServer:: bot = %r' % (bot))
-    _logger.info('ThreadedServer:: telegram_none_stop = %r' % (telegram_none_stop))
-    _logger.info('ThreadedServer:: telegram_interval = %r' % (telegram_interval))
-    _logger.info('ThreadedServer:: telegram_block = %r' % (telegram_block))
+    _logger.debug('ThreadedServer:: telegram-bot polling...')
+    _logger.debug('ThreadedServer:: bot = %r' % (bot))
+    _logger.debug('ThreadedServer:: telegram_none_stop = %r' % (telegram_none_stop))
+    _logger.debug('ThreadedServer:: telegram_interval = %r' % (telegram_interval))
+    _logger.debug('ThreadedServer:: telegram_block = %r' % (telegram_block))
 
     bot.polling(
         none_stop=telegram_none_stop, interval=telegram_interval, block=telegram_block)

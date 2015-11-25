@@ -12,9 +12,7 @@
     'author': 'Jose Zambudio Bernabeu',
     'website': 'http://www.josezambudiobernabeu.com/',
     'depends': ['base', 'telegram', 'mail'],
-    'data': [
-    ],
-    # TODO::
+    'data': [],
     'demo': [],
     'installable': True,
     'application': True,

@@ -16,7 +16,7 @@
 
 `openerp/service/telegram/__ini__.py`
 
-## Uses
+## Usage
 
 ```
 from openerp.service.telegram import BOT

@@ -6,8 +6,7 @@
 import logging
 _logger = logging.getLogger('[TELEGRAM_MAIL]')
 
-from openerp import api, fields, models, SUPERUSER_ID
-from openerp.tools.translate import _
+from openerp import api, models, SUPERUSER_ID
 from openerp.service.telegram import BOT
 
 
@@ -16,14 +15,17 @@ class MailMessage(models.Model):
 
     def _get_default_from(self, cr, uid, context=None):
         try:
-            super(MailMessage, self)._get_default_from(cr, uid, context=context)
+            super(MailMessage, self)._get_default_from(
+                cr, uid, context=context)
         except Exception, e:
-            this = self.pool.get('res.users').browse(cr, SUPERUSER_ID, uid, context=context)
+            this = self.pool.get('res.users').browse(
+                cr, SUPERUSER_ID, uid, context=context)
             if this.telegram_id and this.alias_domain:
                 return 'email@default.com'
             raise e
 
-    def _notify(self, cr, uid, newid, context=None, force_send=False, user_signature=True):
+    def _notify(self, cr, uid, newid, context=None, force_send=False,
+                user_signature=True):
         _logger.info("MailMessage:: _notify(%r, %r, %r, %r, %r, %r, %r)" % (
             self, cr, uid, newid, context, force_send, user_signature))
         self.pool.get('mail.notification')._notify_telegram(cr, uid, [], newid)
@@ -43,10 +45,12 @@ class MailNotification(models.Model):
         _logger.info("MailNotification:: _notify_telegram(%r, %r)" % (
             self, message_id))
         if message.subject or message.body:
-            _logger.info("MailNotification:: message.subject=%r" % (message.subject))
+            _logger.info(
+                "MailNotification:: message.subject=%r" % (message.subject))
             _logger.info("MailNotification:: message.body=%r" % (message.body))
             message_text = "\n".join([
-                "El usuario %s te ha enviado el siguiente mensaje:" % (message.author_id.name),
+                "El usuario %s te ha enviado el siguiente mensaje:" % (
+                    message.author_id.name),
                 message.subject or '',
                 message.body or ''
             ])
@@ -54,8 +58,10 @@ class MailNotification(models.Model):
             for partner in message.author_id.notified_telegram:
                 _logger.info("MailNotification:: partner=%r" % (partner))
                 if partner.telegram_id:
-                    _logger.info("MailNotification:: Enviando a (%s) %s el siguiente mensaje:\n%s" % (
-                        partner.telegram_id, partner.name, message_text))
+                    _logger.info(
+                        "MailNotification:: Enviando a (%s) %s el siguiente "
+                        "mensaje:\n%s" % (
+                            partner.telegram_id, partner.name, message_text))
                     BOT.send_message(partner.telegram_id, message_text)
 
     """
@@ -65,7 +71,8 @@ class MailNotification(models.Model):
         _logger.info("_notify_email:: force_send=%r" % (force_send))
         _logger.info("_notify_email:: user_signature=%r" % (user_signature))
         # Overwrite method to add telegram notification
-        self._notify_telegram(message_id, force_send=force_send, user_signature=user_signature)
+        self._notify_telegram(
+            message_id, force_send=force_send, user_signature=user_signature)
         return super(MailNotification, self)._notify_email(
             message_id, force_send=force_send, user_signature=user_signature)
     """

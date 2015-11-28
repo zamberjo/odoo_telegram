@@ -6,8 +6,7 @@
 import logging
 _logger = logging.getLogger(__name__)
 
-from openerp import api, fields, models
-from openerp.tools.translate import _
+from openerp import fields, models
 
 
 class ResUsers(models.Model):
@@ -21,6 +20,7 @@ class ResUsers(models.Model):
             ('always', 'All Messages'),
         ], string='Notifications by Telegram Bot', default='always',
         related="partner_id.notify_telegram",
-        help="Policy to receive telegram messages for new messages pushed to your personal Inbox:\n"
-                "- Never: no emails are sent\n"
-                "- All Messages: for every notification you receive in your Inbox")
+        help="Policy to receive telegram messages for new messages:\n"
+             "- Never: no emails are sent\n"
+             "- All Messages: for every notification you receive in your"
+             "Inbox")

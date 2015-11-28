@@ -6,8 +6,7 @@
 import logging
 _logger = logging.getLogger(__name__)
 
-from openerp import api, fields, models
-from openerp.tools.translate import _
+from openerp import fields, models
 
 
 class ResPartner(models.Model):
@@ -20,11 +19,13 @@ class ResPartner(models.Model):
             ('none', 'Never'),
             ('always', 'All Messages'),
         ], 'Notifications by Telegram Bot', default='always',
-        help="Policy to receive telegram messages for new messages pushed to your personal Inbox:\n"
-                "- Never: no emails are sent\n"
-                "- All Messages: for every notification you receive in your Inbox")
+        help="Policy to receive telegram messages for new messages:\n"
+             "- Never: no emails are sent\n"
+             "- All Messages: for every notification you receive in your "
+             "Inbox")
 
     notified_telegram = fields.Many2many(
         'res.partner', 'telegram_modification', 'partner_for_id',
         'partner_to_id', 'Telegram notified partners', readonly=True,
-        help='Partners that have a notification pushing this message in their mailboxes')
+        help="Partners that have a notification pushing this message in their "
+             "telegram accounts.")

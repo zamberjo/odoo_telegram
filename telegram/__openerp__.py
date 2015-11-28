@@ -16,7 +16,6 @@
         'views/partner.xml',
         'views/users.xml',
     ],
-    # TODO::
     'demo': [],
     'installable': True,
     'application': True,

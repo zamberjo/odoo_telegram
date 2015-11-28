@@ -9,7 +9,6 @@ import logging
 _logger = logging.getLogger('[TELEGRAM]')
 
 import telebot
-from telebot import types
 from pydoc import locate
 
 import openerp.tools.config as config
@@ -20,12 +19,21 @@ BOT = None
 
 start_bak = ThreadedServer.start
 
-def telegram_thread(bot, telegram_none_stop, telegram_interval, telegram_timeout):
-    _logger.debug('ThreadedServer:: telegram-bot polling...')
-    _logger.debug('ThreadedServer:: bot = %r' % (bot))
-    _logger.debug('ThreadedServer:: telegram_none_stop = %r' % (telegram_none_stop))
-    _logger.debug('ThreadedServer:: telegram_interval = %r' % (telegram_interval))
-    _logger.debug('ThreadedServer:: telegram_timeout = %r' % (telegram_timeout))
+
+def telegram_thread(bot, telegram_none_stop, telegram_interval,
+                    telegram_timeout):
+    _logger.debug(
+        "telegram_thread:: "
+        "bot = %r | "
+        "telegram_none_stop = %r | "
+        "telegram_interval = %r | "
+        "telegram_timeout = %r" % (
+            bot,
+            telegram_none_stop,
+            telegram_interval,
+            telegram_timeout
+        )
+    )
 
     def listener(messages):
         for m in messages:
@@ -33,7 +41,10 @@ def telegram_thread(bot, telegram_none_stop, telegram_interval, telegram_timeout
 
     bot.set_update_listener(listener)
     bot.polling(
-        none_stop=bool(telegram_none_stop), interval=int(telegram_interval), timeout=int(telegram_timeout))
+        none_stop=bool(telegram_none_stop),
+        interval=int(telegram_interval),
+        timeout=int(telegram_timeout))
+
 
 def telegram_spawn():
     global BOT
@@ -55,22 +66,27 @@ def telegram_spawn():
             for m in module.get_modules():
                 m_path = module.get_module_path(m)
                 if os.path.isdir(os.path.join(m_path, 'telegram')):
-                    _logger.debug("telegram handlers on path %r" % (os.path.join(m_path, 'telegram')))
-                    TelegramBotHandlers = locate('openerp.addons.' + m + '.telegram.handlers.TelegramBotHandlers')
+                    _logger.debug("telegram handlers on path %r" % (
+                        os.path.join(m_path, 'telegram')))
+                    TelegramBotHandlers = locate(
+                        'openerp.addons.' + m + '.telegram.handlers.TelegramBotHandlers')
                     TelegramBotHandlers(BOT).handle()
                     _logger.debug('imported!')
-        except Exception,e:
+        except Exception, e:
             _logger.error(e)
             raise e
 
         def target():
-            telegram_thread(BOT, telegram_none_stop, telegram_interval, telegram_timeout)
+            telegram_thread(
+                BOT, telegram_none_stop, telegram_interval, telegram_timeout)
         t = threading.Thread(target=target, name="openerp.service.telegrambot")
         t.setDaemon(True)
         t.start()
         _logger.debug('ThreadedServer:: telegram-bot started!')
     else:
-        _logger.warning("Telegram server not started! Please specify an bot api key!")
+        _logger.warning(
+            "Telegram server not started! Please specify an bot api key!")
+
 
 def new_start(self, stop=False):
     telegram_apikey = config['telegram_apikey']

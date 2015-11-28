@@ -4,6 +4,58 @@
 		"selected_items":
 		[
 			[
+				"tele",
+				"telegram"
+			],
+			[
+				"messa",
+				"message_text"
+			],
+			[
+				"notif",
+				"notify_pids"
+			],
+			[
+				"not",
+				"notif_ids"
+			],
+			[
+				"user",
+				"user_signature"
+			],
+			[
+				"for",
+				"force_send"
+			],
+			[
+				"part",
+				"partners_to_notify"
+			],
+			[
+				"mes",
+				"message_id"
+			],
+			[
+				"no",
+				"notified_partner"
+			],
+			[
+				"excep",
+				"except"
+			],
+			[
+				"reg",
+				"registry_manager"
+			],
+			[
+				"re",
+				"registry_manager"
+			],
+			[
+				"author",
+				"author_id"
+			],
+			[
 				"prepe",
 				"prependTo	.prependTo()"
 			],
@@ -80,10 +132,6 @@
 				"send_message"
 			],
 			[
-				"re",
-				"repeated"
-			],
-			[
 				"last",
 				"last_update_id"
 			],
@@ -98,10 +146,6 @@
 			[
 				"get",
 				"get_user"
-			],
-			[
-				"user",
-				"user_banned_ids"
 			],
 			[
 				"hea",
@@ -470,50 +514,6 @@
 			[
 				"ha",
 				"hand"
-			],
-			[
-				"team",
-				"team0"
-			],
-			[
-				"wi",
-				"winHand"
-			],
-			[
-				"te",
-				"teamId"
-			],
-			[
-				"player",
-				"playerId"
-			],
-			[
-				"set",
-				"setLastCardsOn"
-			],
-			[
-				"le",
-				"length"
-			],
-			[
-				"pl",
-				"player_win"
-			],
-			[
-				"po",
-				"prototype"
-			],
-			[
-				"ex",
-				"extracted_card"
-			],
-			[
-				"extr",
-				"extracted_card"
-			],
-			[
-				"vi",
-				"viewAllPlayers"
 			]
 		]
 	},
@@ -544,9 +544,13 @@
 	"command_palette":
 	{
 		"height": 400.0,
-		"last_filter": "mark",
+		"last_filter": "package",
 		"selected_items":
 		[
+			[
+				"package",
+				"Package Control: Install Package"
+			],
 			[
 				"mark",
 				"Markdown Preview: Preview in Browser"
@@ -604,7 +608,7 @@
 				"FileDiffs: Menu"
 			]
 		],
-		"width": 601.0
+		"width": 529.0
 	},
 	"console":
 	{
@@ -660,10 +664,31 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/zamberjo/Documents/Repositories/odoo_telegram_bot"
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram_mail/static/description"
 	],
 	"file_history":
 	[
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram_mail/telegram/handlers.py",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram_mail/models/mail_message.py",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram/__openerp__.py",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram/models/users.py",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram/models/partner.py",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/installation/telegram/__init__.py",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/installation/setup.py_TODEL?",
+		"/Users/zamberjo/Library/Application Support/Sublime Text 3/Packages/Python Flake8 Lint/Default (OSX).sublime-keymap",
+		"/Users/zamberjo/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/zamberjo/Library/Application Support/Sublime Text 3/Packages/User/Flake8Lint.sublime-settings",
+		"/Users/zamberjo/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/zamberjo/Library/Application Support/Sublime Text 3/Packages/Python Flake8 Lint/Flake8Lint.sublime-settings",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/README.md",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram_mail/telegram/__init__.py",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram_mail/__init__.py",
+		"/Users/zamberjo/Documents/Repositories/hesidohackeadobot/hesidohackeadobot/main.py",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram_mail/README.md",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram/README.md",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram_mail/models/__init__.py",
+		"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram_mail/__openerp__.py",
 		"/Users/zamberjo/Documents/Repositories/odoo/odoo8/odoo8/addons/calendar/calendar.py",
 		"/Users/zamberjo/Documents/Repositories/odoo/odoo8/odoo8/addons/crm/base_partner_merge.py",
 		"/Users/zamberjo/Documents/Repositories/christmas/README.md",
@@ -731,7 +756,6 @@
 		"/Users/zamberjo/Documents/Repositories/odoo/odoo8/home_expenses_costs/views/periodic_movement_view.xml",
 		"/Users/zamberjo/Documents/Repositories/odoo/odoo8/home_expenses_costs/views/tag_view.xml",
 		"/Users/zamberjo/ownCloud/I♥U/2110/que_lo_sepas.txt",
-		"/Users/zamberjo/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/zamberjo/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/Users/zamberjo/Documents/Repositories/odoo/odoo8/odoo8/openerp/tools/__init__.py",
 		"/Users/zamberjo/Documents/Repositories/odoo/odoo8/home_expenses_costs/models/bank.py",
@@ -772,36 +796,19 @@
 		"/Users/zamberjo/Desktop/Pràctica Final-1/PràcticaFinal.cpp",
 		"/Users/zamberjo/Library/Application Support/Sublime Text 3/Packages/User/sftp_servers/dinozapatos",
 		"/Users/zamberjo/Desktop/index.php",
-		"/Users/zamberjo/Desktop/practica_final/galaxias_.txt",
-		"/var/folders/5c/xbxc3q1n7_vdss3zck_5c_0r0000gn/T/sublime-sftp-browse-1420317745/raspberripi_lan/var/www/index.html",
-		"/var/folders/5c/xbxc3q1n7_vdss3zck_5c_0r0000gn/T/sublime-sftp-browse-1420317446/raspberripi_lan/var/www/index.php",
-		"/var/folders/5c/xbxc3q1n7_vdss3zck_5c_0r0000gn/T/sublime-sftp-browse-1420317389/raspberripi_lan/var/www/index_.php",
-		"/var/folders/5c/xbxc3q1n7_vdss3zck_5c_0r0000gn/T/sublime-sftp-browse-1420152252/raspberripi_lan/var/www/index.php",
-		"/var/folders/5c/xbxc3q1n7_vdss3zck_5c_0r0000gn/T/sublime-sftp-browse-1420035863/raspberripi_lan/var/www/index.html",
-		"/var/folders/5c/xbxc3q1n7_vdss3zck_5c_0r0000gn/T/sublime-sftp-browse-1420035520/raspberripi_lan/var/www/index.php",
-		"/Users/zamberjo/Library/Application Support/Sublime Text 3/Packages/User/sftp_servers/raspberripi_lan",
-		"/Users/zamberjo/Desktop/practica_final/PràcticaFinal.cpp",
-		"/Users/zamberjo/Desktop/practica_final/makefile",
-		"/Library/WebServer/Documents/video/index.html",
-		"/Library/WebServer/Documents/video.html",
-		"/Users/zamberjo/Desktop/index.html",
-		"/Users/zamberjo/Desktop/Fling/README.md",
-		"/Users/zamberjo/Desktop/music/RadioDownloader/main.py",
-		"/Users/zamberjo/Desktop/music/setup.py",
-		"/Users/zamberjo/Desktop/music/RadioDownloader/download_spotify.py",
-		"/Users/zamberjo/Music/RadioDownloader/.config",
-		"/Users/zamberjo/Desktop/music/RadioDownloader/download_flaix.py",
-		"/Users/zamberjo/Desktop/prueba.css"
+		"/Users/zamberjo/Desktop/practica_final/galaxias_.txt"
 	],
 	"find":
 	{
-		"height": 25.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
 		"height": 93.0,
 		"where_history":
 		[
+			"/Users/zamberjo/Documents/Repositories/odoo_telegram/telegram_mail",
+			"/Users/zamberjo/Documents/Repositories/odoo_telegram",
 			"/Users/zamberjo/Documents/Repositories/odoo/odoo8/odoo8/addons,-*.po*",
 			"/Users/zamberjo/Documents/Repositories/odoo/odoo8/odoo8/addons",
 			"/Users/zamberjo/Documents/Repositories/odoo/odoo8/odoo8/openerp/addons,*.py",
@@ -836,6 +843,37 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"RegistryManager",
+			"ThreadedServer",
+			"module",
+			"config",
+			"locate",
+			"types",
+			"telebot",
+			"logging",
+			"threading",
+			"datetime",
+			"os",
+			"ping",
+			"force_send",
+			"_notify_telegram",
+			"_notify",
+			"get_partners_to_telegram",
+			"_notify",
+			"get_partners_to_telegram",
+			"message",
+			"partner_id",
+			"records",
+			"message.",
+			"message_handler",
+			"BOT",
+			"telegram_block",
+			"_logger.debug",
+			"message_handler",
+			",",
+			"_logger.info",
+			"bot",
+			"info",
 			"_name",
 			"mail.message",
 			"message",
@@ -932,38 +970,7 @@
 			"@bot.message_handler(commands=",
 			"@bot.message_handler(commands=[",
 			"register_url",
-			"message_handler",
-			"wait",
-			"text",
-			"repeated",
-			"register_last_update",
-			"send_telegram",
-			" (.*) *\\| (.*)",
-			"_crypt_context",
-			"default_crypt_context",
-			"_crypt_context",
-			"default_crypt_context",
-			"_crypt_context",
-			"default_crypt_context",
-			"password_crypt",
-			"window",
-			"read",
-			"admin",
-			"search",
-			"movement_ids",
-			"transferene_movement",
-			"transference_movement",
-			"transference_id",
-			"TransferenceMovement",
-			"mov",
-			"movement_ids",
-			"from_name",
-			"account_movement",
-			"create",
-			"strptime",
-			"periodic_id",
-			"rec",
-			"periodic_date"
+			"message_handler"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -971,6 +978,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"_logger.info",
+			",\n",
+			"'\\n",
+			"_logger.debug",
 			"HSHBOT_TOKEN",
 			"HSHBOT_ADMIN_ID",
 			"HSHBOT_DB_URI",
@@ -1085,7 +1096,7 @@
 	"project": "odoo.telegram.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 72.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1316,12 +1327,12 @@
 		"selected_items":
 		[
 			[
-				"mus",
-				"~/Documents/Sublime workspace/music.sublime-project"
+				"",
+				"~/Documents/Repositories/odoo_telegram/odoo.telegram.sublime-project"
 			],
 			[
-				"",
-				"~/Documents/Sublime workspace/odoo8.home.expenses.costs.sublime-project"
+				"mus",
+				"~/Documents/Sublime workspace/music.sublime-project"
 			]
 		],
 		"width": 380.0

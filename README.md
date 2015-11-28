@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/zamberjo/odoo_telegram.svg?branch=8.0)](https://travis-ci.org/zamberjo/odoo_telegram)
+
 # <p align="center">Odoo_Telegram
 ##<p align="center">Telegram bot integration on odoo
 

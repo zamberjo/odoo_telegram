@@ -52,12 +52,11 @@ class TelegramBotHandlers(object):
                             ('telegram_id', '=', message.from_user.id)
                         ])
                         _logger.info('from_user = %r' % (from_user))
-                        message = MailMessage.create({
+                        MailMessage.create({
                             'type': 'comment',
                             'author_id': from_user.id,
                             'notified_partner_ids': [
                                 (6, False, from_user.notified_telegram.ids)],
-                            'subject': 'Message sended by telegram',
                             'subtype_id': 1,
                             'body': message.text,
                         })

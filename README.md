@@ -35,6 +35,7 @@ BOT.send_message(telegramUserId, 'Hello World!')
  * On handlers.py file, adds this code:
  ```
     from openerp import SUPERUSER_ID, api, sql_db
+    from contextlib import closing
     ...
 
     class TelegramBotHandlers(object):

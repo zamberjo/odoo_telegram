@@ -31,8 +31,8 @@ BOT.send_message(telegramUserId, 'Hello World!')
 
 * For handle methods:
  * Adds "telegram" package on your addon, and "handlers" module python in it.
- * On handlers.py file, adds this code:
  * Example on `addons/telegram_mail
+ * On handlers.py file, adds this code:
  ```
     from openerp import SUPERUSER_ID, api, sql_db
     ...
@@ -60,17 +60,17 @@ BOT.send_message(telegramUserId, 'Hello World!')
             @BOT.message_handler(commands=['ping'])
             def handle_ping(message):
                 with api.Environment.manage():
-                env = api.Environment(
-                    self.get_cursor(), self.uid, self.context)
-                with closing(env.cr):
-                    try:
-                        ResUsers = env['res.users']
-                        ...
-                        ResUSers.create({...})
-                    except Exception, e:
-                        ...
-                    else:
-                        env.cr.commit()
+                    env = api.Environment(
+                        self.get_cursor(), self.uid, self.context)
+                    with closing(env.cr):
+                        try:
+                            ResUsers = env['res.users']
+                            ...
+                            ResUSers.create({...})
+                        except Exception, e:
+                            ...
+                        else:
+                            env.cr.commit()
  ```
 
 ### Configuration

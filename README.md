@@ -49,5 +49,5 @@ telegram_block = ...
 
 * Module telegram
 * Integration module telegram with mail.messages
+* Notification state odoo server (down, up)
 * Rethink everything again... hahaha :D
-

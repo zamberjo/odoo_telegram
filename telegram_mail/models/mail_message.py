@@ -4,7 +4,7 @@
 
 
 import logging
-_logger = logging.getLogger(__name__)
+_logger = logging.getLogger('[TELEGRAM_MAIL]')
 
 from openerp import api, fields, models, SUPERUSER_ID
 from openerp.tools.translate import _
@@ -22,6 +22,7 @@ class MailMessage(models.Model):
             if this.telegram_id and this.alias_domain:
                 return 'email@default.com'
             raise e
+
 
 
 class MailNotification(models.Model):
@@ -66,4 +67,3 @@ class MailNotification(models.Model):
         self._notify_telegram(message_id, force_send=force_send, user_signature=user_signature)
         return super(MailNotification, self)._notify_email(
             message_id, force_send=force_send, user_signature=user_signature)
-

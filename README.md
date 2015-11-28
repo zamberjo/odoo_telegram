@@ -96,6 +96,7 @@ telegram_timeout = ...
 
 ### TODO
 
+* Security layer on telegram bot
 * Module telegram
 * Integration module telegram with mail.messages
 * Notification state odoo server (down, up)

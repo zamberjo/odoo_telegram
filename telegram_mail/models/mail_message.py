@@ -23,47 +23,49 @@ class MailMessage(models.Model):
                 return 'email@default.com'
             raise e
 
+    def _notify(self, cr, uid, newid, context=None, force_send=False, user_signature=True):
+        _logger.info("MailMessage:: _notify(%r, %r, %r, %r, %r, %r, %r)" % (
+            self, cr, uid, newid, context, force_send, user_signature))
+        self.pool.get('mail.notification')._notify_telegram(cr, uid, [], newid)
+        return super(MailMessage, self)._notify(
+            cr, uid, newid,
+            context=context,
+            force_send=force_send,
+            user_signature=user_signature)
 
 
 class MailNotification(models.Model):
     _inherit = 'mail.notification'
 
     @api.multi
-    def get_partners_to_telegram(self, message):
-        notify_pids = []
-        for notification in self:
-            if notification.is_read:
-                continue
-            partner = notification.partner_id
-            # Do not send to partners without telegram_id defined
-            if not partner.telegram_id:
-                continue
-            # Do not send to partners having same telegram_id than the author (can cause loops or bounce effect due to messy database)
-            if message.author_id and message.author_id.telegram_id == partner.telegram_id:
-                continue
-            # Partner does not want to receive any telegram messages or is opt-out
-            if partner.notify_telegram == 'none':
-                continue
-            notify_pids.append(partner)
-        return notify_pids
-
-    @api.multi
-    def _notify_telegram(self, message_id, force_send=False, user_signature=True):
+    def _notify_telegram(self, message_id):
         message = self.env['mail.message'].browse(message_id)
+        _logger.info("MailNotification:: _notify_telegram(%r, %r)" % (
+            self, message_id))
         if message.subject or message.body:
+            _logger.info("MailNotification:: message.subject=%r" % (message.subject))
+            _logger.info("MailNotification:: message.body=%r" % (message.body))
             message_text = "\n".join([
                 "El usuario %s te ha enviado el siguiente mensaje:" % (message.author_id.name),
                 message.subject or '',
                 message.body or ''
             ])
-            for partner in self.get_partners_to_telegram(message):
+            _logger.info("MailNotification:: message_text=%r" % (message_text))
+            for partner in message.author_id.notified_telegram:
+                _logger.info("MailNotification:: partner=%r" % (partner))
                 if partner.telegram_id:
+                    _logger.info("MailNotification:: Enviando a (%s) %s el siguiente mensaje:\n%s" % (
+                        partner.telegram_id, partner.name, message_text))
                     BOT.send_message(partner.telegram_id, message_text)
 
-
+    """
     @api.multi
     def _notify_email(self, message_id, force_send=False, user_signature=True):
+        _logger.info("_notify_email:: message_id=%r" % (message_id))
+        _logger.info("_notify_email:: force_send=%r" % (force_send))
+        _logger.info("_notify_email:: user_signature=%r" % (user_signature))
         # Overwrite method to add telegram notification
         self._notify_telegram(message_id, force_send=force_send, user_signature=user_signature)
         return super(MailNotification, self)._notify_email(
             message_id, force_send=force_send, user_signature=user_signature)
+    """

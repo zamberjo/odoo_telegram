@@ -23,6 +23,11 @@ class TelegramBotHandlers(object):
 
     def __init__(self, bot):
         self.bot = bot
+        self.uid = SUPERUSER_ID
+        self.context = {}
+
+    def get_cursor(self):
+        return sql_db.db_connect(config['db_name']).cursor()
 
     def handle(self):
         _logger.info('TelegramBotHandlers:handle -> %r' % (self.bot))
@@ -34,11 +39,11 @@ class TelegramBotHandlers(object):
             BOT.reply_to(message, 'pong!')
 
         def _step_do_message(message):
-            _logger.info("_step_do_message: %r" % (message))
+            _logger.info("_step_do_message:")
+            _logger.info(message)
             markup = types.ReplyKeyboardHide(selective=False)
-            new_cr, uid, context = sql_db.db_connect(config['db_name']).cursor(), SUPERUSER_ID, {}
             with api.Environment.manage():
-                env = api.Environment(new_cr, uid, context)
+                env = api.Environment(self.get_cursor(), self.uid, self.context)
                 with closing(env.cr):
                     try:
                         MailMessage = env['mail.message']
@@ -46,10 +51,10 @@ class TelegramBotHandlers(object):
                         from_user = ResPartner.search([('telegram_id', '=', message.from_user.id)])
                         _logger.info('from_user = %r' % (from_user))
                         to_user = 14
-                        MailMessage.create({
+                        message = MailMessage.create({
                             'type': 'comment',
                             'author_id': from_user.id,
-                            'notified_partner_ids': [(6, False, [to_user])],
+                            'notified_partner_ids': [(6, False, from_user.notified_telegram.ids)],
                             'subject': 'Message sended by telegram',
                             'subtype_id': 1,
                             'body': message.text,
@@ -65,6 +70,23 @@ class TelegramBotHandlers(object):
         def _step_ask_message(message):
             _logger.info("_step_ask_message: %r" % (message))
             markup = types.ReplyKeyboardHide(selective=False)
+            with api.Environment.manage():
+                env = api.Environment(self.get_cursor(), self.uid, self.context)
+                with closing(env.cr):
+                    try:
+                        ResPartner = env['res.partner']
+                        # Save message to...
+                        from_partner = ResPartner.search(
+                            [('telegram_id', '=', message.from_user.id)])
+                        notified_partner = ResPartner.search([
+                            ('name', '=', message.text),
+                        ])
+                        from_partner.notified_telegram = [(6, False, notified_partner.ids)]
+                    except Exception, e:
+                        _logger.error(e)
+                        BOT.reply_to(message, 'Step 3: ERROR - Vuelva a intentarlo en unos minutos.', reply_markup=markup)
+                    finally:
+                        env.cr.commit()
             msg = BOT.reply_to(message, 'Escribe el mensaje a enviar', reply_markup=markup)
             BOT.register_next_step_handler(msg, _step_do_message)
 
@@ -73,31 +95,28 @@ class TelegramBotHandlers(object):
             markup = types.ReplyKeyboardMarkup()
             registry = RegistryManager.get(config['db_name'])
             _logger.info("db_name = %r" % (config['db_name']))
-            domain = [('telegram_id', '!=', False)]
-            with registry.cursor() as cr:
-                try:
-                    telegram_users = []
-                    for model in MESSAGE_MODELS:
-                        if message.text == model[1]:
-                            # pooler
-                            Model = registry.get(model[0])
-                            _logger.info("model = %r" % (model[0]))
-                            # records ids
-                            ids = Model.search(cr, SUPERUSER_ID, domain)
-                            _logger.info("ids = %r" % (ids))
-                            # model records names
-                            cr.execute("SELECT name FROM " + model[0].replace('.', '_') + " where id in %s", (tuple(ids),))
-                            telegram_users = [r[0] for r in cr.fetchall()]
-                            _logger.info("telegram_users = %r" % (telegram_users))
+            with api.Environment.manage():
+                env = api.Environment(self.get_cursor(), self.uid, self.context)
+                with closing(env.cr):
+                    try:
+                        telegram_users = []
+                        for model in MESSAGE_MODELS:
+                            if message.text == model[1]:
+                                # pooler
+                                Model = env[model[0]]
+                                _logger.info("model = %r" % (model[0]))
+                                # records ids
+                                records = Model.search([('telegram_id', '!=', False)])
+                                _logger.info("records = %r" % (records))
 
-                    for name in telegram_users:
-                        markup.row("%s" % (name))
-                    msg = BOT.reply_to(message, 'Step 2: Elija un registro', reply_markup=markup)
-                    BOT.register_next_step_handler(msg, _step_ask_message)
-                except Exception, e:
-                    _logger.exception("Step 2: %s" % str(e))
-                    markup = types.ReplyKeyboardHide(selective=False)
-                    BOT.reply_to(message, 'Step 2: ERROR - Vuelva a intentarlo en unos minutos.', reply_markup=markup)
+                        for record in records:
+                            markup.row("%s" % (record.name_get()[0][1]))
+                        msg = BOT.reply_to(message, 'Step 2: Elija un registro', reply_markup=markup)
+                        BOT.register_next_step_handler(msg, _step_ask_message)
+                    except Exception, e:
+                        _logger.exception("Step 2: %s" % str(e))
+                        markup = types.ReplyKeyboardHide(selective=False)
+                        BOT.reply_to(message, 'Step 2: ERROR - Vuelva a intentarlo en unos minutos.', reply_markup=markup)
 
         @BOT.message_handler(commands=['send_message'])
         def _handle_send_message(message):

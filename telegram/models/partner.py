@@ -23,3 +23,8 @@ class ResPartner(models.Model):
         help="Policy to receive telegram messages for new messages pushed to your personal Inbox:\n"
                 "- Never: no emails are sent\n"
                 "- All Messages: for every notification you receive in your Inbox")
+
+    notified_telegram = fields.Many2many(
+        'res.partner', 'telegram_modification', 'partner_for_id',
+        'partner_to_id', 'Telegram notified partners', readonly=True,
+        help='Partners that have a notification pushing this message in their mailboxes')
